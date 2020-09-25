@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RegistroPagos.Models;
 
 namespace RegistroPagos.Data
 {
@@ -12,5 +13,8 @@ namespace RegistroPagos.Data
             : base(options)
         {
         }
+
+        //---MXV: Agregar modelos que se van creando
+        public DbSet<FormaPago> FormaPago { get; set; }
     }
 }
