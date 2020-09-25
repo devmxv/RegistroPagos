@@ -9,6 +9,7 @@ using RegistroPagos.Models;
 
 namespace RegistroPagos.Controllers
 {
+    [Area("Guest")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
