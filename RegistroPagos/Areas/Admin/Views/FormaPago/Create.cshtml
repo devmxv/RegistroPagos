@@ -1,0 +1,31 @@
+﻿@model FormaPago
+@{ 
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<h2 class="text-info">Crear Forma de Pago</h2>
+<br />
+<p>Aquí se registran los medios de pago utilizados en las operaciones.</p>
+<form method="post" asp-action="Create">
+    <div class="border pt-5 pl-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Descripcion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Descripcion" class="form-control" />
+            </div>
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_BotonesCrearRegresar" />
+            </div>
+        </div>
+    </div>
+</form>
