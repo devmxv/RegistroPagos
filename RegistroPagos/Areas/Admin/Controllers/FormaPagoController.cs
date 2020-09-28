@@ -52,6 +52,23 @@ namespace RegistroPagos.Areas.Admin.Controllers
             return View(formaPago);
         }
 
+        //---Get - Detalles de Forma de Pago
+        public async Task<IActionResult> Details(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            //---obtener info de registro
+            var formaPago = await _db.FormaPago.FindAsync(id);
+            if(formaPago == null)
+            {
+                return NotFound();
+            }
+            return View(formaPago);
+
+        }
+
         //---POST - Editar (Vista)
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,6 +98,39 @@ namespace RegistroPagos.Areas.Admin.Controllers
             }
 
             return View(formaPago);
+        }
+
+        //---Get - Eliminar
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var formaPago = await _db.FormaPago.FindAsync(id);
+            if(formaPago == null)
+            {
+                return NotFound();
+            }
+            return View(formaPago);
+        }
+
+        //---Post - Eliminar
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> DeleteConfirmed(int? id)
+        {
+            var formaPago = await _db.FormaPago.FindAsync(id);
+            if(formaPago == null)
+            {
+                return NotFound();
+            }
+
+            _db.FormaPago.Remove(formaPago);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }
