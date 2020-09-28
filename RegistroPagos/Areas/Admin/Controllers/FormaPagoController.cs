@@ -51,5 +51,36 @@ namespace RegistroPagos.Areas.Admin.Controllers
             }
             return View(formaPago);
         }
+
+        //---POST - Editar (Vista)
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var formaPago = await _db.FormaPago.FindAsync(id);
+            if (formaPago == null)
+            {
+                return NotFound();
+            }
+            return View(formaPago);
+        }
+
+        //--- Post - Editar (Acción)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(FormaPago formaPago)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Update(formaPago);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(formaPago);
+        }
     }
 }
